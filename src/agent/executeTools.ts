@@ -1,7 +1,7 @@
-import { tools } from "./tools";
+import { tools } from "./tools/index"
 export type Toolname = keyof typeof tools;
 
-export const executeTools = async(name:string, args:any)=>{
+export const executeTool = async(name:string, args:any)=>{
 
     const tool = tools[name as Toolname];
 

@@ -4,9 +4,16 @@ import { openai } from '@ai-sdk/openai'
 import { SYSTEM_PROMPT } from './system/prompt'
 import type { AgentCallbacks } from '../types'
 import { tools } from "./tools"
-import { executeTools } from "./executeTools"
+import { Laminar, getTracer } from "@lmnr-ai/lmnr"
+import { executeTool } from "./executeTools"
 
 const MODEL_NAME = 'gpt-5-mini';
+
+Laminar.initialize({
+    
+projectApiKey:process.env.LMNR_PROJECT_API_KEY
+})
+
 
 export const runAgent = async(userMessage: string, conversationHistory: ModelMessage[], callbacks: AgentCallbacks,) => {
 
@@ -16,15 +23,25 @@ export const runAgent = async(userMessage: string, conversationHistory: ModelMes
         prompt: userMessage,
         system: SYSTEM_PROMPT,
         tools,
+        experimental_telemetry:{
+
+            isEnabled:true,
+            tracer:getTracer(),
+        }
 
     })  
 
+    
+
+    toolCalls.forEach((singleTool)=>{
+
+        executeTool(singleTool.toolName, singleTool.input)
+    })
+
     console.log(text, toolCalls)
 
-    toolCalls.forEach((tc)=>{
 
-        executeTools(tc.toolName, tc.input);
-    })
+
 }
 
 runAgent('What is the current time right now?');
