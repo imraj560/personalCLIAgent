@@ -6,6 +6,7 @@ import type { AgentCallbacks } from '../types'
 import { tools } from "./tools"
 import { Laminar, getTracer } from "@lmnr-ai/lmnr"
 import { executeTool } from "./executeTools"
+import { ToolCall } from "../../dist/ui/components/ToolCall"
 
 const MODEL_NAME = 'gpt-5-mini';
 
@@ -17,7 +18,7 @@ projectApiKey:process.env.LMNR_PROJECT_API_KEY
 
 export const runAgent = async(userMessage: string, conversationHistory: ModelMessage[], callbacks: AgentCallbacks,) => {
 
-    const { text, toolCalls } = await generateText({
+    const { text,toolCalls } = await generateText({
 
         model: openai(MODEL_NAME),
         prompt: userMessage,
@@ -31,14 +32,12 @@ export const runAgent = async(userMessage: string, conversationHistory: ModelMes
 
     })  
 
-    
-
-    toolCalls.forEach((singleTool)=>{
-
-        executeTool(singleTool.toolName, singleTool.input)
-    })
-
     console.log(text, toolCalls)
+
+    toolCalls.forEach(async(tc)=>{
+
+        console.log(await executeTool(tc.toolName, tc.input))
+    })
 
 
 
