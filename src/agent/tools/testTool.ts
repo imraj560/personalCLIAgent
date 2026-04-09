@@ -14,7 +14,7 @@ async function testTool() {
             console.log("Test Passed: Tool returned data.");
         }
     } catch (error) {
-        console.error("❌ Test Crashed:", error);
+        console.error("Test Crashed:", error);
     }
 }
 
