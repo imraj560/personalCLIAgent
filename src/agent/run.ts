@@ -16,7 +16,7 @@ projectApiKey:process.env.LMNR_PROJECT_API_KEY
 })
 
 
-export const runAgent = async(userMessage: string, conversationHistory: ModelMessage[], callbacks: AgentCallbacks,) => {
+export async function runAgent(userMessage: string, conversationHistory: ModelMessage[], callbacks: AgentCallbacks,):Promise<any> {
 
     const { text,toolCalls } = await generateText({
 
