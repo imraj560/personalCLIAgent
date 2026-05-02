@@ -28,9 +28,15 @@ Tool abstraction and schema validation
 Evaluation-driven development for non-deterministic systems
 Context window optimization strategies (RAG, summarization, compaction)
 Safe AI design with approval flows and sandboxing
+
+
 🛠️ Tech Stack
 JavaScript / TypeScript
 OpenAI SDK
 Zod (schema validation)
 Laminar (observability & eval tracing)
 Node.js runtime
+
+Runniing Instuctions:
+Clone the repo, create env file, you will need laminar tracing and open ai api key. 
+npm install, npm run build. Type AGI on your cli to access and then fire away.
