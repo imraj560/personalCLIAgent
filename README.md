@@ -20,6 +20,8 @@ Context window compaction
 Efficient message filtering
 Human-in-the-Loop – Approval system for safe execution of sensitive actions
 Sandboxed Execution – Secure environment for running commands and code
+
+
 🧠 Key Concepts Implemented
 Agent vs traditional workflow systems
 Tool abstraction and schema validation
